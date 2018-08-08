@@ -16,7 +16,8 @@ mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true});
 const port = process.env.PORT || 8050;
 
 //routes
-const carRouter = require('./router/cars');
+const ___ = require('./router/user');
+const ___ = require('./router/location');
 
 //middleware
 server.use(helmet());

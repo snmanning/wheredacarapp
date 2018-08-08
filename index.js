@@ -5,6 +5,8 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const errorHandler = require('./middleware/errorHandler');
+const notFoundHandler = require('./middleware/404');
 
 //environment variables
 dotenv.config();
@@ -29,10 +31,10 @@ server.use(bodyParsesr.urlencoded({extended:true}));
 server.use();
 
 //404 handler
-server.use();
+server.use(notFoundHandler);
 
 //err handler
-server.use();
+server.use(errorHandler);
 
 //show time
 server.listen(port, () => {

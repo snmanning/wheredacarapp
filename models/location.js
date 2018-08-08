@@ -7,15 +7,15 @@ const locationSchema = new Schema({
         min: -90,
         max: 90,
         required: true
-    }
+    },
     long: {
         type: Number,
         min: -180,
         max: 180,
         required: true
-    }
+    },
     user: {
-        type: ,
+        type: Schema.Types.ObjectId,
         required: true
     }
 });

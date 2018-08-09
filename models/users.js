@@ -12,11 +12,11 @@ const userSchema = new Schema({
         },
     hash: {
         type: String,
-        required: true
+        // required: true
         },
     salt: {
         type: String,
-        required: true
+        // required: true
         }
 });
 

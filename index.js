@@ -18,17 +18,18 @@ mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true});
 const port = process.env.PORT || 8050;
 
 //routes
-const ___ = require('./router/user');
-const ___ = require('./router/location');
+const userRouter = require('./router/users');
+const locationRouter = require('./router/locations');
 
 //middleware
 server.use(helmet());
 server.use(morgan('combined'));
 server.use(bodyParser.json());
-server.use(bodyParsesr.urlencoded({extended:true}));
+server.use(bodyParser.urlencoded({extended:true}));
 
 //routers
-server.use();
+server.use(userRouter);
+server.use(locationRouter);
 
 //404 handler
 server.use(notFoundHandler);

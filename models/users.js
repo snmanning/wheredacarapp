@@ -4,7 +4,7 @@ const Email = require('mongoose-type-email');
 
 const userSchema = new Schema({
     email: {
-        type: Schema.Types.Email,
+        type: Email,
         required: true,
         trim: true,
         unique: true,

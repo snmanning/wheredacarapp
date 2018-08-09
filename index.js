@@ -28,8 +28,8 @@ server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({extended:true}));
 
 //routers
-server.use(userRouter);
-server.use(locationRouter);
+server.use('/api', userRouter);
+server.use('/api', locationRouter);
 
 //404 handler
 server.use(notFoundHandler);

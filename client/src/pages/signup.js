@@ -6,10 +6,11 @@ class SignUp extends Component {
         return(
             <div>
                 <Logo/>
+                <h2>Sign Up</h2>
                 <form>
-                    <div><input type='text'/></div>
-                    <div><input type='text'/></div>
-                    <div><button/></div>
+                    <div><input type='text' placeholder='Email'/></div>
+                    <div><input type='text' placeholder='Password'/></div>
+                    <div><button/>Submit</div>
                 </form>
             </div>
         );

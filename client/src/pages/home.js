@@ -7,9 +7,9 @@ class Home extends Component {
             <div>
                 <Logo/>
                 <div>
-                    <button>Find!</button>
-                    <button>Park</button>
-                    <button>Unpark</button>
+                    <div><button>Find!</button></div>
+                    <div><button>Park</button></div>
+                    <div><button>Unpark</button></div>
                 </div>
             </div>
         );

@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Logo extends Component {
-    render() {
-        return(
-            <div>
-                <h1>WHEREDACAR@APP LOGO</h1>
-            </div>
-        );
-    }
-}
+const Logo = props => (
+    <div>
+        <h1>WHEREDACAR@APP LOGO</h1>
+    </div>
+);
 
 export default Logo;

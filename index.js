@@ -3,13 +3,21 @@ const server = express();
 const helmet = require('helmet');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+const passport = require('passport');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const errorHandler = require('./middleware/errorHandler');
 const notFoundHandler = require('./middleware/404');
+const localStrategy = require('./strategies/local');
 
 //environment variables
 dotenv.config();
+
+//passport configuration
+passport.use(localStrategy);
+
+//passport initialize
+passport.initialize();
 
 //connect database
 mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true});

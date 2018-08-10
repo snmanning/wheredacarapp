@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const park = () => {
-    return(
-    <div>
-        You parked your car
-    </div>
-    );
+class Park extends Component {
+    render() {
+        return(
+            <div>
+                <p>You parked your car</p>
+            </div>
+        );
+    }
 }
 
-export defualt park;
+export default Park;

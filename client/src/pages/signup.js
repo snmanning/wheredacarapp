@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Logo from '../components/Logo';
 
 class SignUp extends Component {
@@ -7,11 +7,9 @@ class SignUp extends Component {
             <div>
                 <Logo/>
                 <form>
-                    <input>
-                    </input>
-                    <input>
-                    </input>
-                    <button/>
+                    <div><input type='text'/></div>
+                    <div><input type='text'/></div>
+                    <div><button/></div>
                 </form>
             </div>
         );

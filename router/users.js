@@ -5,6 +5,9 @@ const User = require('../models/users');
 //signup POST
 router.post('/signup', async (req, res, next) => {
     const { email, hash, salt } = req.body;
+    if(!email || !password) {
+        next({ msg: 'You have not submitted an email and password', status: 400 });
+    }
     try {
         const user = new User({email, hash, salt});
             await user.save();

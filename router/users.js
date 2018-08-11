@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/users');
+const passport = require('passport');
 
 //signup POST
 router.post('/signup', async (req, res, next) => {
-    const { email, hash, salt } = req.body;
+    const { email, password } = req.body;
     if(!email || !password) {
         next({ msg: 'You have not submitted an email and password', status: 400 });
     }
@@ -28,14 +29,16 @@ router.get('/logout', async (req, res, next) => {
     }
 });
 //login POST
-router.post('/login', async (req, res, next) => {
-    try {
-        res.status(200).json({
-            msg: 'You are now logged in. Go find yo car'
-        })
-    } catch (err) {
-        next (err);
-    }
+router.post('/login',
+             passport.authenticate('local', { failureRedirect: '/login', session: false }), 
+             async (req, res, next) => {
+                if(req.isAuthenticated()) {
+                    res.status(200).json({
+                        token: req.authInfo.token
+                    })
+                } else {
+                    next({ msg: 'unauthorized', status: 401 });
+                }
 });
 //delete DELETE
 router.delete('/users/:email', async (req, res, next) => {

@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const Email = require('mongoose-type-email');
 const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
 
 const userSchema = new Schema({
     email: {
@@ -27,6 +28,22 @@ userSchema.methods.setPassword = function setPassword(password) {
                         .toString('hex');
     this.salt = salt;
     this.hash = hash;
+}
+
+userSchema.methods.isValidPassword = function isValidPassword(password) {
+    const possibleHash = crypto.pbkdf2Sync(password, this.salt, 100000, 64, 'sha512')
+                                .toString('hex');
+    return this.hash === possibleHash;
+}
+
+userSchema.methods.generateJWT = function generateJWT(){
+    const payload = {
+        id: this._id,
+        email: this.email,
+        expiration: new Date()
+    };
+    const token = jwt.sign(payload, process.env.SECRET);
+    return token;
 }
 
 const User = mongoose.model('User', userSchema);

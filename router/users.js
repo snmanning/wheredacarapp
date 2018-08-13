@@ -40,8 +40,33 @@ router.post('/login',
                     next({ msg: 'Either your username or password is incorrect', status: 400 });
                 }
 });
+
+const jwt = require('jsonwebtoken');
+function auth(req, res, next) {
+    const tokenWithBearer = req.headers.authorization;
+    if(!tokenWithBearer) {
+        next({msg: 'Unauthorized', status: 401});
+    }
+    const isValid = tokenWithBearer.includes('Bearer');
+    if(!isValid) {
+        next({msg: 'Unauthorized', status: 401});
+    }
+    //this removes the 'bearer' part leaving just the token
+    const token = tokenWithBearer.slice(7)
+    try{
+        console.log(token);
+        payload = jwt.verify(token, process.env.SECRET);
+        console.log(payload);
+        req.email = payload.email;
+        req.id = payload.id
+        next();
+    } catch (err) {
+        next({msg: 'Unauthorized', status: 401});
+    }
+}
+
 //delete DELETE
-router.delete('/users/:email', async (req, res, next) => {
+router.delete('/users/:email', auth, async (req, res, next) => {
     try {
         res.status(200).json({
             msg: 'Your account has been deleted'

@@ -42,8 +42,12 @@ router.post('/login',
                 }
 });
 
+//TODO: Still need to implement and fix this
 //delete DELETE
 router.delete('/users/:email', auth, async (req, res, next) => {
+    //you should check that req.email is the same as req.params.email
+    //if they are, delete
+    //if not then error
     try {
         res.status(200).json({
             msg: 'Your account has been deleted'

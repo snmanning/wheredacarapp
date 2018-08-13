@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Location = require('../models/location');
+const auth = require('../middleware/auth');
+
+router.use(auth); //protect all of these routes
 
 //new location POST
 router.post('/locations', async (req, res, next) => {

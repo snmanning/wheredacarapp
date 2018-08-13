@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/users');
 const passport = require('passport');
+const auth = require('../middleware/auth')
 
 //signup POST
 router.post('/signup', async (req, res, next) => {
@@ -25,7 +26,7 @@ router.get('/logout', async (req, res, next) => {
             msg: 'You have logged out'
         })
     } catch (err) {
-        next(err);
+       return next(err);
     }
 });
 //login POST
@@ -37,33 +38,9 @@ router.post('/login',
                         token: req.authInfo.token
                     })
                 } else {
-                    next({ msg: 'Either your username or password is incorrect', status: 400 });
+                    return next({ msg: 'Either your username or password is incorrect', status: 400 });
                 }
 });
-
-const jwt = require('jsonwebtoken');
-function auth(req, res, next) {
-    const tokenWithBearer = req.headers.authorization;
-    if(!tokenWithBearer) {
-        next({msg: 'Unauthorized', status: 401});
-    }
-    const isValid = tokenWithBearer.includes('Bearer');
-    if(!isValid) {
-        next({msg: 'Unauthorized', status: 401});
-    }
-    //this removes the 'bearer' part leaving just the token
-    const token = tokenWithBearer.slice(7)
-    try{
-        console.log(token);
-        payload = jwt.verify(token, process.env.SECRET);
-        console.log(payload);
-        req.email = payload.email;
-        req.id = payload.id
-        next();
-    } catch (err) {
-        next({msg: 'Unauthorized', status: 401});
-    }
-}
 
 //delete DELETE
 router.delete('/users/:email', auth, async (req, res, next) => {
@@ -72,7 +49,7 @@ router.delete('/users/:email', auth, async (req, res, next) => {
             msg: 'Your account has been deleted'
         })
     } catch (err) {
-        next(err);
+        return next(err);
     }
 });
 

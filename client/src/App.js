@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import Logo from './components/Logo';
+import { Route, Redirect, Switch } from 'react-router-dom';
 
+import Logo from './components/Logo';
 import Home from './pages/Home';
 import LogIn from './pages/LogIn';
 import SignUp from './pages/SignUp';
@@ -13,11 +14,14 @@ class App extends Component {
     return (
       <div>
         <Logo/>
-        <SignUp/>
-        <LogIn/>
-        <Home/>
-        <Park/>
-        <Find/>
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route path='/login' component={LogIn} />
+          <Route path='/signup' component={SignUp} />
+          <Route path='/park' component={Park} />
+          <Route path='/find' component={Find} />
+          <Redirect to='/' />
+        </Switch>
       </div>
     );
   }

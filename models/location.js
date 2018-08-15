@@ -8,7 +8,7 @@ const locationSchema = new Schema({
         max: 90,
         required: true
     },
-    long: {
+    lon: {
         type: Number,
         min: -180,
         max: 180,

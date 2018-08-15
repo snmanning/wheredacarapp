@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route, Redirect, Switch } from 'react-router-dom';
+import PrivateRoute from './components/PrivateRoute';
 
 import Logo from './components/Logo';
 import Home from './pages/Home';
@@ -15,7 +16,7 @@ class App extends Component {
       <div>
         <Logo/>
         <Switch>
-          <Route exact path='/' component={Home} />
+          <PrivateRoute exact Path='/' component={Home} />
           <Route path='/login' component={LogIn} />
           <Route path='/signup' component={SignUp} />
           <Route path='/park' component={Park} />

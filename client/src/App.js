@@ -16,11 +16,11 @@ class App extends Component {
       <div>
         <Logo/>
         <Switch>
-          <PrivateRoute exact Path='/' component={Home} />
+          <PrivateRoute exact path='/' component={Home} />
           <Route path='/login' component={LogIn} />
           <Route path='/signup' component={SignUp} />
-          <Route path='/park' component={Park} />
-          <Route path='/find' component={Find} />
+          <PrivateRoute path='/park' component={Park} />
+          <PrivateRoute path='/find' component={Find} />
           <Redirect to='/' />
         </Switch>
       </div>

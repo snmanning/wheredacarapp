@@ -14,24 +14,14 @@ router.post('/signup', async (req, res, next) => {
         const user = new User({ email });
         user.setPassword(password);
         await user.save();
-        res.redirect('/login');
     } catch (err) {
         next(err);
     }
 });
-//logout GET
-router.get('/logout', async (req, res, next) => {
-    try {
-        res.status(200).json({
-            msg: 'You have logged out'
-        })
-    } catch (err) {
-       return next(err);
-    }
-});
+
 //login POST
 router.post('/login',
-             passport.authenticate('local', { failureRedirect: '/login', session: false }), 
+             passport.authenticate('local', { session: false }), 
              async (req, res, next) => {
                 if(req.isAuthenticated()) {
                     res.status(200).json({
